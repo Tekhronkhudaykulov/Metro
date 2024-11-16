@@ -3,7 +3,6 @@ import Keyboard from "react-simple-keyboard";
 import {
   defaultKeyboard,
   displayKeyboard,
-  numericKeyboard,
 } from "./typesKeyboars";
 import "react-simple-keyboard/build/css/index.css";
 import "./view.css";
@@ -78,7 +77,7 @@ const KeyboardComponent = ({
       <Keyboard
         keyboardRef={ref}
         {...keyboardOptions}
-        onChangeAll={onChange}
+        onChange={onChange}
         onKeyPress={handleKeyPress}
         inputName={inputName}
         layoutName={layoutName}

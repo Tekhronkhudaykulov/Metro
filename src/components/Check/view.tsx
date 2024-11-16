@@ -20,7 +20,7 @@ const Check = () => {
       <div className="check-number-block text-center">
         Chipta raqami: <span className="check-number font-700">#2005794</span>
       </div>
-      <div className="warning leading-[1.2] text-justify">
+      <div className="warning leading-[1.2] text-center">
         DIQQAT! Bir martalik chipta faqat ushbu bekatda 1 ta qatnov uchun amal
         qiladi !
       </div>

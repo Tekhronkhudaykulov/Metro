@@ -2,13 +2,11 @@ import { Button, Modal } from "antd";
 import { modalsStore } from "../../store";
 import { Check } from "../../components";
 import { CloseOutlined } from "@ant-design/icons";
-import { ASSETS } from "../../assets/images/assets";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router";
 
-interface Props {}
 
-const CheckModal = ({}: Props) => {
+const CheckModal = () => {
   const { closeModal, modals } = modalsStore();
   const navigate = useNavigate();
   return (
@@ -33,9 +31,9 @@ const CheckModal = ({}: Props) => {
           type="primary"
           className="w-[360px] h-[66px] rounded-[13px]"
         >
-          <span className="text-[28px] font-500">Продолжать</span>
+          <span className="text-[28px] font-500">Продолжить</span>
         </Button>
-        <img src={ASSETS.print} alt="" />
+        {/* <img src={ASSETS.print} alt="" /> */}
       </div>
     </Modal>
   );
