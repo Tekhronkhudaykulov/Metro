@@ -1,0 +1,22 @@
+{
+  "main": "Home",
+  "select_category": "Категорияни танланг",
+  "select_service": "Хизматни танланг",
+  "back": "Ортга",
+  "welcome": "Хуш келибсиз",
+  "thanks_for_wait": "Кутганингиз учун рахмат",
+  "individual": "Жисмоний щахс",
+  "entity": "Юридик щахс",
+  "queue_number": "Навбат раками",
+  "service": "Хизмат",
+  "date": "Сана",
+  "required_documents": "Керакли хужжатлар",
+  "identity_documents": "Щахсни тасдикловчи хужжатлар",
+  "documents_related_to_motor_vehicles": "Автотранспортга тегишли хужжатлар",
+  "transfer_from_coric": "Курикдан отказиш",
+  "payment": "Тулов",
+  "list_hall": "Руйхат зали",
+  "category": "Руйхатдан утказиш",
+  "scan": "Сканер килиш",
+  "scanInfo": "Хурматли мижоз. Илтимос чекингизни сканер килинг"
+}
