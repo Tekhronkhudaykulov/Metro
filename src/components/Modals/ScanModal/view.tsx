@@ -20,19 +20,23 @@ const ScanModal = () => {
     setTimeout(() => {
       handleClick();
     }, 300);
+    // @ts-ignore
     if (modals?.scan && inputRef.current) {
       inputRef.current.focus();
     }
     document.body.addEventListener("click", handleClick);
+    // @ts-ignore
     if (!modals?.scan) {
       setValue("");
     }
     return () => {
       document.body.removeEventListener("click", handleClick);
     };
+    // @ts-ignore
   }, [modals?.scan]);
   useEffect(() => {
     const handler = setTimeout(() => {
+    // @ts-ignore
       if (modals?.scan && value) {
         const newValue = Number(value);
         checkAQueue({
@@ -60,10 +64,12 @@ const ScanModal = () => {
     return () => {
       clearTimeout(handler);
     };
+    // @ts-ignore
   }, [modals?.scan, value]);
   return (
     <>
       <Modal
+    // @ts-ignore
         open={modals?.scan}
         centered
         title={`Информация`}
@@ -73,7 +79,10 @@ const ScanModal = () => {
       >
         <p className="text-center">{t("scanInfo")}</p>
         <img src={ASSETS.scan} className="h-[200px] mx-auto my-4" alt="" />
-        {modals?.scan && (
+        
+        {
+    // @ts-ignore
+        modals?.scan && (
           <input
             className="border"
             onChange={(e) => setValue(e.target.value)}

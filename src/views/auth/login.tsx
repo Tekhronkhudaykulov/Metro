@@ -14,6 +14,9 @@ const Login = () => {
   const [ipAddress, setIpAddress] = useState(loginParse?.ip);
 
   const { login, loginLoading } = authStore();
+
+  console.log(login);
+  
   const [form] = Form.useForm();
   const forms = [
     {

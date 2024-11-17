@@ -3,7 +3,6 @@ import Keyboard from "react-simple-keyboard";
 import {
   defaultKeyboard,
   displayKeyboard,
-  numericKeyboard,
 } from "./typesKeyboars";
 import "react-simple-keyboard/build/css/index.css";
 import "./view.css";
@@ -84,6 +83,7 @@ const KeyboardComponent = ({
         layoutName={layoutName}
         layout={layout}
         onRender={() => console.log(`Rendered`)}
+        // @ts-ignore
         display={displayKeyboard}
         physicalKeyboardHighlight
         preventMouseDownDefault

@@ -1,6 +1,5 @@
 import { Button, Modal } from "antd";
 import { modalsStore } from "../../store";
-import { HomeOutlined } from "@ant-design/icons";
 import { ASSETS } from "../../assets/images/assets";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../router";
