@@ -1,18 +1,20 @@
 import { Button } from "antd";
 
-const Counter = () => {
+const Counter = ({onClickIncrement, onClickDecrement, count} : any) => {
   return (
-    <div className="min-w-[350px] w-[350px] rounded-[30px] h-[70px] flex items-center justify-between bg-[#F4F4F4] px-5 py-4">
+    <div className="w-full rounded-[30px] h-[90px] flex items-center justify-between bg-[#F4F4F4] px-5 py-4">
       <Button
         type="primary"
-        className="flex items-center justify-center shadow-lg !bg-[#5E7AEA] [&>span]:font-500 [&>span]:text-[30px] text-white min-w-[40px] w-[40px] h-[40px] rounded-full"
+        className="flex items-center justify-center shadow-lg !bg-[#5E7AEA] [&>span]:font-500 [&>span]:text-[30px] text-white min-w-[50px] w-[50px] h-[50px] rounded-full"
+        onClick={onClickDecrement}
       >
         -
       </Button>
-      <div className="text-[31px] font-500">1</div>
+      <div className="text-[35px] font-500">{count}</div>
       <Button
         type="primary"
-        className="flex items-center justify-center shadow-lg !bg-[#5E7AEA] [&>span]:font-500 [&>span]:text-[30px] text-white min-w-[40px] w-[40px] h-[40px] rounded-full"
+        className="flex items-center justify-center shadow-lg !bg-[#5E7AEA] [&>span]:font-500 [&>span]:text-[30px] text-white min-w-[50px] w-[50px] h-[50px] rounded-full"
+        onClick={onClickIncrement}
       >
         +
       </Button>

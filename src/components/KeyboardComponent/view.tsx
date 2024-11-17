@@ -77,7 +77,7 @@ const KeyboardComponent = ({
       <Keyboard
         keyboardRef={ref}
         {...keyboardOptions}
-        onChangeAll={onChange}
+        onChange={onChange}
         onKeyPress={handleKeyPress}
         inputName={inputName}
         layoutName={layoutName}

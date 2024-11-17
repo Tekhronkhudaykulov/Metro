@@ -2,13 +2,11 @@ import { Button, Modal } from "antd";
 import { modalsStore } from "../../store";
 import { Check } from "../../components";
 import { CloseOutlined } from "@ant-design/icons";
-import { ASSETS } from "../../assets/images/assets";
 import { useNavigate } from "react-router-dom";
-import { APP_ROUTES } from "../../router";
+import { CheckPrinterFunc } from "../../hook/view";
 
-interface Props {}
 
-const CheckModal = ({}: Props) => {
+const CheckModal = ({count, price}: any) => {
   const { closeModal, modals } = modalsStore();
   const navigate = useNavigate();
   return (
@@ -27,15 +25,16 @@ const CheckModal = ({}: Props) => {
       <div className="flex items-center justify-center gap-6 mt-10">
         <Button
           onClick={() => {
+            CheckPrinterFunc({count, price})
             closeModal("check");
-            navigate(APP_ROUTES.PHONE);
+            // navigate(APP_ROUTES.PHONE);
           }}
           type="primary"
           className="w-[360px] h-[66px] rounded-[13px]"
         >
-          <span className="text-[28px] font-500">Продолжать</span>
+          <span  className="text-[28px] font-500">Продолжить</span>
         </Button>
-        <img src={ASSETS.print} alt="" />
+        {/* <img src={ASSETS.print} alt="" /> */}
       </div>
     </Modal>
   );

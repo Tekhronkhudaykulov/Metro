@@ -21,11 +21,13 @@ const PrintCheckModal = ({}: Props) => {
       onCancel={() => closeModal("printCheck")}
     >
       <div className="w-[80%] mx-auto">
-        <img
+        {/* <img
           src={ASSETS.printAnimation}
           className="mx-auto mb-2 text-center"
           alt=""
-        />
+        /> */}
+          <img className="mx-auto w-[80px] h-[80px] object-contain" onClick={() => openModal("success")} src={ASSETS.print} alt="" />
+
         <div className="text-[31px] font-700 text-center">Печать чека</div>
         <div className="bg-[#F4F4F4] rounded-[24px] py-3 px-4 mt-6 mb-12">
           <div className="flex justify-between gap-2">
@@ -66,12 +68,11 @@ const PrintCheckModal = ({}: Props) => {
               navigate(APP_ROUTES.HOME);
             }}
             type="primary"
-            className="flex items-center justify-center w-[400px] h-[75px] rounded-[13px]"
+            className="flex items-center justify-center w-full h-[75px] rounded-[13px]"
             icon={<HomeOutlined className="[&>svg]:text-[32px]" />}
           >
             <span className="text-[23px] font-500">Вернуться на главную</span>
           </Button>
-          <img onClick={() => openModal("success")} src={ASSETS.print} alt="" />
         </div>
       </div>
     </Modal>
