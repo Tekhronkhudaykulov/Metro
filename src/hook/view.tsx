@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { socketValueStore } from "../store";
-import { Port } from "../config";
+import { Port, PortPrint } from "../config";
 
 
 export const CashDevice = () => {
@@ -47,38 +47,50 @@ export const CashDevice = () => {
   };
   
 
-  export const CheckPrinterFunc = ({count, price}: any) => {
-        useEffect(() => {
-            const socket = new WebSocket(Port);
+  export const HandlePrint = ( count: any, price: any ) => {
 
-            socket.onopen = () => {
-                const openCommand = JSON.stringify({
-                  device: "PRINTER",
-                  method: "OPEN",
-                  data: {
-                    kioskId: "1",
-                    address: "Bekat: Novza",
-                    date: "Sana: 14-11-2024 yil",
-                    time: "Vaqt: 10:55:32",
-                    company: "<<TOSHKENT METROPOLITENI>> UK",
-                    vesTibul: "Vestibul: 2",
-                    ticketNum: "Chipta raqami: #2005794",
-                    ticketTitle: "DIQQAT! Bir martalik chipta faqat ushbu bekatda 1 ta qatnov uchun amal qiladi !",
-                    count: count
-                  },
-                  lst: [
-                    { key: "Chipta raqami", value: "#2005794" },
-                    { key: "Дата и время", value: "" },
-                    { key: "Сумма платежа", value: `${price} сум` },
-                    { key: "Комиссия", value: `0 сум (0%)` },
-                    { type: "break" },
-                    { key: "Общая сумма", value: `${price} сум`, bold: true },
-                    { key: "Статус платежа", value: "Оплачен", bold: true },
-                    { key: "QR", value: "https://infinitypay.uz/" },
-                  ],
-                });
-                socket.send(openCommand);
-              };
-              
-        },[])
-  }
+    console.log({count, price}, 'anfkjasnkjsabfgsj');
+    
+
+      let allPrice = price;
+      let allCount = count
+      const socket = new WebSocket(PortPrint); // Portni mos ravishda o'zgartiring
+  
+      socket.onopen = () => {
+        const openCommand = JSON.stringify({
+          device: "PRINTER",
+          method: "OPEN",
+          data: {
+            kioskId: "1",
+            address: "Bekat: Novza",
+            date: "Sana: 14-11-2024 yil",
+            time: "Vaqt: 10:55:32",
+            company: "<<TOSHKENT METROPOLITENI>> UK",
+            vesTibul: "Vestibul: 2",
+            ticketNum: "Chipta raqami: #2005794",
+            ticketTitle:
+              "DIQQAT! Bir martalik chipta faqat ushbu bekatda 1 ta qatnov uchun amal qiladi !",
+            count: allCount,
+          },
+          lst: [
+            { key: "Chipta raqami", value: "#2005794" },
+            { key: "Дата и время", value: "" },
+            { key: "Сумма платежа", value: `${allPrice} сум` },
+            { key: "Комиссия", value: `0 сум (0%)` },
+            { type: "break" },
+            { key: "Общая сумма", value: `${allPrice} сум`, bold: true },
+            { key: "Статус платежа", value: "Оплачен", bold: true },
+            { key: "QR", value: "https://infinitypay.uz/" },
+          ],
+        });
+        socket.send(openCommand);
+      };
+  
+      socket.onerror = (error) => {
+        console.error("WebSocket error: ", error);
+      };
+  
+      socket.onclose = () => {
+        console.log("WebSocket connection closed.");
+      };
+  };

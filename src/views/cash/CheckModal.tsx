@@ -3,10 +3,11 @@ import { modalsStore } from "../../store";
 import { Check } from "../../components";
 import { CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { CheckPrinterFunc } from "../../hook/view";
+import { HandlePrint } from "../../hook/view";
 
 
 const CheckModal = ({count, price}: any) => {
+  
   const { closeModal, modals } = modalsStore();
   const navigate = useNavigate();
   return (
@@ -25,7 +26,7 @@ const CheckModal = ({count, price}: any) => {
       <div className="flex items-center justify-center gap-6 mt-10">
         <Button
           onClick={() => {
-            CheckPrinterFunc({count, price})
+            HandlePrint(count, price)
             closeModal("check");
             // navigate(APP_ROUTES.PHONE);
           }}
