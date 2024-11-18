@@ -17,11 +17,11 @@ const Logo = () => {
         alt=""
       />
       <div className="font-600">
-        <div className="uppercase text-[27px] leading-[1] font-600">
-          Toshkent shahar transport vazirligi{" "}
-          <span className="text-[18px]">ga</span>
+        <div className=" text-[27px] leading-[1] font-600">
+          "TOSHKENT METROPOLITENI DUK"
+          <span className="text-[18px]"></span>
         </div>
-        qarashli toshkent metropoliteni raqamli chipta aparati
+        <p>qarashli Toshkent metropoliteni raqamli chipta aparati</p>
       </div>
     </div>
   );

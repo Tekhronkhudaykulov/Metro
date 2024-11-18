@@ -12,6 +12,7 @@ import phoneVarant2 from './phoneVariant2.png'
 import phoneVarant3 from './phoneVariant3.png'
 import phoneVarant4 from './phoneVariant4.png'
 import phoneVarant5 from './phoneVariant5.png'
+import NotificationImg from "./notifications.svg"
 
 
 export const ASSETS = {
@@ -29,4 +30,5 @@ export const ASSETS = {
     phoneVarant3,
     phoneVarant4,
     phoneVarant5,
+    NotificationImg
 }

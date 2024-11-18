@@ -8,6 +8,7 @@ type StateAction = {
     check?: boolean;
     printCheck?: boolean;
     success?: boolean;
+    cashModal? : boolean
   };
 };
 
@@ -19,6 +20,7 @@ const initialState: StateAction = {
     check: false,
     printCheck: false,
     success: false,
+    cashModal: false
   },
 };
 
@@ -33,3 +35,10 @@ const modalsStore = create<StateAction>((set) => ({
 }));
 
 export default modalsStore;
+
+
+
+
+// {modals?.cashModal && (
+//   <Notification  message={"Внесенные купюры могут быть подделкой !"} />
+//   )}

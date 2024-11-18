@@ -8,6 +8,7 @@ import KeyboardComponent from "../../components/KeyboardComponent/view";
 import { numericKeyboard } from "../../components/KeyboardComponent/typesKeyboars";
 import { useRef, useState } from "react";
 import InputMask from "react-input-mask";
+import CheckModal from "../cash/CheckModal";
 
 
 
@@ -18,6 +19,8 @@ const Phone = () => {
   const [phone, setPhone] = useState("");
   const [inputName, setInputName] = useState<string>("");
   const keyboard = useRef(null);
+
+  let changeMoney = localStorage.getItem("changeMoney")
 
 
 
@@ -93,9 +96,9 @@ const Phone = () => {
                 Введите сумму платежа
               </div>
               <Input
-              onClick={() => setActive(0)}
+                onClick={() => setActive(0)}
                 className="border-transparent  w-full h-[90px] p-5 bg-white rounded-[21px] text-[41px] font-bold"
-                value={"5000 UZS"}
+                value={changeMoney?.toString()}
               />
             </div>
           </div>
@@ -112,10 +115,11 @@ const Phone = () => {
             />
           </div>
         </div>
-        <Footer nextText="ПРОДОЛЖИТЬ" onNext={() => openModal("printCheck")} />
+        <Footer nextText="ПРОДОЛЖИТЬ" onNext={() => openModal("check")} />
       </div>
       <PrintCheckModal />
       <SuccessModal />
+      <CheckModal count={1} price={2000}/>
     </>
   );
 };

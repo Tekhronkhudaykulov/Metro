@@ -1,57 +1,107 @@
-import { useEffect } from "react";
-import { socketValueStore } from "../store";
+import { useEffect, useRef } from "react";
+import { modalsStore, socketValueStore } from "../store";
 import { Port, PortPrint } from "../config";
 
 
+// export const CashDevice = () => {
+//     const { addValue } = socketValueStore();
+ 
+//   const { openModal } = modalsStore();
+
+   
+  
+//     useEffect(() => {
+//       const socket = new WebSocket(Port);
+  
+//       socket.onopen = () => {
+//         const openCommand = JSON.stringify({
+//           device: "BILL_ACCEPTOR",
+//           method: "OPEN",
+//         });
+//         socket.send(openCommand);
+//       };
+  
+//       socket.onmessage = (event) => {
+//         try {
+//           const message = JSON.parse(event.data);
+//           console.log("Received message:", message);
+  
+//           if (message.data === "REJECTED") {
+//             openModal("cashModal")
+//             // Qo'shimcha ishlarni bajarish mumkin (masalan, to'lovni qayta ishlash)
+//           } else if (message.method === "READ" && message.data) {
+//             const valueObject = { id: Date.now(), amount: message.data };
+//             addValue(valueObject);
+//           }
+//         } catch (error) {
+//           console.error("Error parsing message:", error);
+//         }
+  
+//         const stackCommand = JSON.stringify({
+//           device: "BILL_ACCEPTOR",
+//           method: "STACK",
+//         });
+//         socket.send(stackCommand);
+//       };
+  
+//       return () => {
+//         socket.close();
+//       };
+//     }, [addValue]);
+// };
+  
 export const CashDevice = () => {
-    const { addValue } = socketValueStore();
-  
-    useEffect(() => {
-      const socket = new WebSocket(Port);
-  
-      socket.onopen = () => {
-        const openCommand = JSON.stringify({
-          device: "BILL_ACCEPTOR",
-          method: "OPEN",
-        });
-        socket.send(openCommand);
-      };
-  
-      socket.onmessage = (event) => {
-        try {
-          const message = JSON.parse(event.data);
-          console.log("Received message:", message);
-  
-          if (message.data === "REJECTED") {
-            alert("Transaction rejected. The amount will not be added.");
-            // Qo'shimcha ishlarni bajarish mumkin (masalan, to'lovni qayta ishlash)
-          } else if (message.method === "READ" && message.data) {
-            const valueObject = { id: Date.now(), amount: message.data };
-            addValue(valueObject);
-          }
-        } catch (error) {
-          console.error("Error parsing message:", error);
+  const { addValue } = socketValueStore();
+  const { openModal } = modalsStore();
+  const socketRef = useRef<WebSocket | null>(null); // WebSocketni boshqarish uchun ref
+
+  useEffect(() => {
+    const socket = new WebSocket(Port);
+    socketRef.current = socket;
+
+    socket.onopen = () => {
+      const openCommand = JSON.stringify({
+        device: "BILL_ACCEPTOR",
+        method: "OPEN",
+      });
+      socket.send(openCommand);
+    };
+
+    socket.onmessage = (event) => {
+      try {
+        const message = JSON.parse(event.data);
+        console.log("Received message:", message);
+
+        if (message.data === "REJECTED") {
+          openModal("cashModal");
+        } else if (message.method === "READ" && message.data) {
+          const valueObject = { id: Date.now(), amount: message.data };
+          // @ts-ignore
+          addValue(valueObject);
         }
-  
-        const stackCommand = JSON.stringify({
-          device: "BILL_ACCEPTOR",
-          method: "STACK",
-        });
-        socket.send(stackCommand);
-      };
-  
-      return () => {
-        socket.close();
-      };
-    }, [addValue]);
-  };
-  
+      } catch (error) {
+        console.error("Error parsing message:", error);
+      }
+
+      const stackCommand = JSON.stringify({
+        device: "BILL_ACCEPTOR",
+        method: "STACK",
+      });
+      socket.send(stackCommand);
+    };
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close(); // WebSocketni tozalash
+        socketRef.current = null;
+      }
+    };
+  }, [addValue]);
+
+  return null; // Bu komponentdan UI chiqmaydi
+};
 
   export const HandlePrint = ( count: any, price: any ) => {
-
-    console.log({count, price}, 'anfkjasnkjsabfgsj');
-    
-
       let allPrice = price;
       let allCount = count
       const socket = new WebSocket(PortPrint); // Portni mos ravishda o'zgartiring
@@ -61,27 +111,11 @@ export const CashDevice = () => {
           device: "PRINTER",
           method: "OPEN",
           data: {
-            kioskId: "1",
-            address: "Bekat: Novza",
-            date: "Sana: 14-11-2024 yil",
-            time: "Vaqt: 10:55:32",
-            company: "<<TOSHKENT METROPOLITENI>> UK",
-            vesTibul: "Vestibul: 2",
-            ticketNum: "Chipta raqami: #2005794",
-            ticketTitle:
-              "DIQQAT! Bir martalik chipta faqat ushbu bekatda 1 ta qatnov uchun amal qiladi !",
+            station: "Bekat: Novza",
+            // ticketNum: "Chipta raqami: #2005794",
             count: allCount,
+            price: allPrice
           },
-          lst: [
-            { key: "Chipta raqami", value: "#2005794" },
-            { key: "Дата и время", value: "" },
-            { key: "Сумма платежа", value: `${allPrice} сум` },
-            { key: "Комиссия", value: `0 сум (0%)` },
-            { type: "break" },
-            { key: "Общая сумма", value: `${allPrice} сум`, bold: true },
-            { key: "Статус платежа", value: "Оплачен", bold: true },
-            { key: "QR", value: "https://infinitypay.uz/" },
-          ],
         });
         socket.send(openCommand);
       };
